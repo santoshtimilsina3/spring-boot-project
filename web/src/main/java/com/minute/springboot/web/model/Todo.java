@@ -1,13 +1,12 @@
 package com.minute.springboot.web.model;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
-
 public class Todo {
 
         private int id;
         private String user;
+        @Size(min = 6,max = 10, message = "Enter 6 chars less than 10")
         private String desc;
         private Date targetDate;
         private boolean isDone;

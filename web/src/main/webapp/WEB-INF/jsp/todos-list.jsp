@@ -12,9 +12,9 @@
 
 <table class="table table-striped table-dark table-hover">
 <tr><th>id</th>
+<th>name</th>
 <th>desc</th>
-<th>date</th>
-<th>isDone</th>
+<th>targetDate</th>
 <th>Action</th>
 </tr>
  <c:forEach items="${data}" var="todo">
