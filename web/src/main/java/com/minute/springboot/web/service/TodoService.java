@@ -39,4 +39,9 @@ public class TodoService {
             }
         });
     }
+
+    public List<Todo> addTodo(String name, String desc){
+        todos.add(new Todo(++todoCount, name,desc,new Date(), false));
+        return retrieveTodos(name);
+    }
 }

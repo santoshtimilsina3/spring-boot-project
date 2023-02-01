@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 public class LoginService {
 
     public boolean validation(String name, String password){
-       return name.equals("sanu")&& password.equals("manu");
+       return name.equals("in28Minutes")&& password.equals("manu");
     }
 }
