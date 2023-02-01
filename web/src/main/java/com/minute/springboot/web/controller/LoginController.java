@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.IdentityScope;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -36,22 +37,25 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/todos-list", method = RequestMethod.GET)
-    public String getValues(ModelMap modelMap) {
-        List<Todo> result = todoService.retrieveTodos("in28Minutes");
+    public String getValues(ModelMap modelMap, HttpSession session) {
+        String user = (String) session.getAttribute("name");
+        List<Todo> result = todoService.retrieveTodos(user);
         modelMap.put("data", result);
         boolean res = result.size() > 0;
         return res ? "todos-list" : "welcome";
     }
 
     @RequestMapping(value = "/todo", method = RequestMethod.GET)
-    public String todo() {
+    public String todo(ModelMap modelMap, HttpSession session) {
+        modelMap.addAttribute("todo",new Todo());
         return "todo";
     }
 
     @RequestMapping(value = "/todo", method = RequestMethod.POST)
-    public String addTodo(@RequestParam String desc, ModelMap modelMap, HttpSession session) {
+    public String addTodo(@ModelAttribute("todo")Todo todo,  ModelMap modelMap, HttpSession session) {
         String name = (String) session.getAttribute("name");
-        List<Todo> todos = todoService.addTodo(name, desc);
+        System.out.println(todo.getDesc());
+        List<Todo> todos = todoService.addTodo(name, todo.getDesc());
         return "redirect:/todos-list";
 
     }

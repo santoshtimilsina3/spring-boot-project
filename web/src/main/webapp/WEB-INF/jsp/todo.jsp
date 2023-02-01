@@ -1,11 +1,12 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
 <title>Add todo</title>
-<form method="post">
-Description <br>
-<input type ="text" name ="desc"><br>
+<form:form method="post" modelAttribute="todo">
+<form:label path="desc" >Description</form:label>
+<input path="desc" type ="text" name ="desc"><br>
 <input type="submit" name="submit"/>
-</form>
+</form:form>
 </head>
 <body>
 Add todo
