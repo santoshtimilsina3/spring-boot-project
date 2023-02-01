@@ -3,20 +3,15 @@ package com.minute.springboot.web.controller;
 import com.minute.springboot.web.model.Todo;
 import com.minute.springboot.web.service.LoginService;
 import com.minute.springboot.web.service.TodoService;
-import com.oracle.xmlns.internal.webservices.jaxws_databinding.JavaMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Method;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@SessionAttributes(names = "name")
 public class LoginController {
     @Autowired
     LoginService loginService;
@@ -29,9 +24,10 @@ public class LoginController {
         return "login";
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String welcome(@RequestParam String name, @RequestParam String pass, ModelMap modelMap) {
+    public String welcome(@RequestParam String name, @RequestParam String pass, ModelMap modelMap,HttpSession session) {
         modelMap.put("name", name);
         modelMap.put("pass", pass);
+        session.setAttribute("name",name);
       boolean response =  loginService.validation(name,pass);
         return response ? "welcome" : "login";
     }
@@ -43,4 +39,11 @@ public class LoginController {
        boolean res = result.size() > 0;
         return res ?"todos-list": "welcome";
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "todos-list";
+    }
+
 }
