@@ -49,9 +49,16 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/todo", method = RequestMethod.POST)
-    public String addTodo(@RequestParam String desc, ModelMap modelMap,HttpSession session) {
+    public String addTodo(@RequestParam String desc, ModelMap modelMap, HttpSession session) {
         String name = (String) session.getAttribute("name");
         List<Todo> todos = todoService.addTodo(name, desc);
+        return "redirect:/todos-list";
+
+    }
+
+   @RequestMapping(value = "/delete", method= RequestMethod.GET)
+    public String delete(@RequestParam("id") int  id, ModelMap modelMap, HttpSession session) {
+        todoService.deleteTodo(id);
         return "redirect:/todos-list";
 
     }

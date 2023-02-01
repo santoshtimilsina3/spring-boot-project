@@ -7,8 +7,8 @@ import java.util.*;
 
 @Service
 public class TodoService {
-
     private static List<Todo> todos = new ArrayList<Todo>();
+
     private static int todoCount = 3;
 
     static {
@@ -33,11 +33,13 @@ public class TodoService {
     }
 
     public void deleteTodo(int id) {
-        todos.forEach(todo -> {
+        Iterator<Todo> iterator = todos.iterator();
+        while (iterator.hasNext()) {
+            Todo todo = iterator.next();
             if (todo.getId() == id) {
-                todos.remove(todo);
+                iterator.remove();
             }
-        });
+        }
     }
 
     public List<Todo> addTodo(String name, String desc){
