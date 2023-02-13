@@ -12,9 +12,9 @@ public class TodoService {
     private static int todoCount = 3;
 
     static {
-        todos.add(new Todo(2, "in28Minutes", "Learn Spring MVC", new Date(), false));
-        todos.add(new Todo(1, "in28Minutes", "Learn Struts", new Date(), false));
-        todos.add(new Todo(3, "in28Minutes", "Learn Hibernate", new Date(), false));
+        todos.add(new Todo(2, "superadmin", "Learn Spring MVC", new Date(), false));
+        todos.add(new Todo(1, "superadmin", "Learn Struts", new Date(), false));
+        todos.add(new Todo(3, "superadmin", "Learn Hibernate", new Date(), false));
     }
 
     public List<Todo> retrieveTodos(String user) {
@@ -27,9 +27,9 @@ public class TodoService {
         return userTodos;
     }
 
-    public void addTodo(String name, String desc, Date targetDate,
-                        boolean isDone) {
-        todos.add(new Todo(++todoCount, name, desc, targetDate, isDone));
+    public List<Todo> addTodo(String name, String desc, Date targetDate) {
+        todos.add(new Todo(++todoCount, name, desc, targetDate, false));
+        return todos;
     }
 
     public void deleteTodo(int id) {
@@ -42,8 +42,28 @@ public class TodoService {
         }
     }
 
-    public List<Todo> addTodo(String name, String desc){
-        todos.add(new Todo(++todoCount, name,desc,new Date(), false));
+    public List<Todo> addTodo(String name, String desc) {
+        todos.add(new Todo(++todoCount, name, desc, new Date(), false));
         return retrieveTodos(name);
+    }
+
+    public Todo get(int todo) {
+        for (Todo data : todos) {
+            if (data.getId() == todo) {
+                System.out.println(data);
+                return data;
+            }
+        }
+        return null;
+    }
+
+    public void update(Todo todo) {
+        todos.forEach(data -> {
+                    if (data.getId() == todo.getId()) {
+                        data = todo;
+                        System.out.println("updated");
+                    }
+                }
+        );
     }
 }

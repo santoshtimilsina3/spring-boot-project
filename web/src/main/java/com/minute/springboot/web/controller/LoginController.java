@@ -5,14 +5,18 @@ import com.minute.springboot.web.service.LoginService;
 import com.minute.springboot.web.service.TodoService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -21,6 +25,12 @@ public class LoginController {
     LoginService loginService;
     @Autowired
     TodoService todoService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(simpleDateFormat, false));
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap modelMap) {
@@ -53,14 +63,14 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/todo", method = RequestMethod.POST)
-    public String addTodo( ModelMap modelMap, HttpSession session, @Valid Todo todo,  BindingResult result) {
+    public String addTodo(ModelMap modelMap, HttpSession session, @Valid Todo todo, BindingResult result) {
         System.out.println(result);
         if (result.hasErrors()) {
             return "todo";
         }
         String name = (String) session.getAttribute("name");
         System.out.println(todo.getDesc());
-        List<Todo> todos = todoService.addTodo(name, todo.getDesc());
+        List<Todo> todos = todoService.addTodo(name, todo.getDesc(),todo.getTargetDate());
         return "redirect:/todos-list";
 
     }
@@ -70,6 +80,26 @@ public class LoginController {
         todoService.deleteTodo(id);
         return "redirect:/todos-list";
 
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String update(@RequestParam int id, ModelMap modelMap) {
+
+        Todo todo = todoService.get(id);
+        modelMap.addAttribute("todo", todo);
+        return "/todo";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result, HttpSession session) {
+
+        if (result.hasErrors()) {
+            return "todo";
+        }
+        String name = (String) session.getAttribute("name");
+        todo.setUser(name);
+        todoService.update(todo);
+        return "redirect:/todos-list";
     }
 
 }

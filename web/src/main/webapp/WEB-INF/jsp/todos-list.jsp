@@ -1,12 +1,4 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
-<html>
-<head>
-<title>hello</title>
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet">
-</head>
-<body>
+  <%@ include file=" /WEB-INF/jsp/nav.jspf" %>
 <div class="container">
 <h1>List OF TODOS</h1>
 
@@ -22,8 +14,10 @@
 <td> ${todo.id}</td>
 <td> ${todo.user}</td>
 <td>${todo.desc}</td>
-<td> ${todo.targetDate}</td>
-<th><button class="button-primary"><a  class="btn btn-delete" href="/delete/?id=${todo.id}"> Delete</a></button>
+<td><fmt:formatDate value="${todo.targetDate}" pattern="dd/MM/YYYY"/></td>
+<th><button class="button-primary"><a  class="btn btn-delete" href="/delete/?id=${todo.id}"> Delete</a>
+<button class="button-primary"><a  class="btn btn-update" href="/update/?id=${todo.id}"> Update</a>
+</button>
 
 </tr>
        </c:forEach>
@@ -31,7 +25,4 @@
 <a class="button button-primary" href="/todo">add todo</a>
 </div>
 
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-		<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</body>
-</html>
+<%@ include file=" /WEB-INF/jsp/footer.jspf" %>
