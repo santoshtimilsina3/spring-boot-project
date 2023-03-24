@@ -1,6 +1,7 @@
 package com.santosh.demo.springboot.demo.service;
 
 import com.santosh.demo.springboot.demo.entity.Department;
+import com.santosh.demo.springboot.demo.error.DepartmentNotFound;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface DepartmentService {
 
     public List<Department> findAll();
 
-    public Department getById(Long id);
+    public Department getById(Long id) throws DepartmentNotFound;
 
     public void deleteDepartmentById(Long departmentId);
 

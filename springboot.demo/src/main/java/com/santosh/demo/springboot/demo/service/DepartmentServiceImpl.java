@@ -1,12 +1,14 @@
 package com.santosh.demo.springboot.demo.service;
 
 import com.santosh.demo.springboot.demo.entity.Department;
+import com.santosh.demo.springboot.demo.error.DepartmentNotFound;
 import com.santosh.demo.springboot.demo.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -28,9 +30,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department getById(Long id) {
-        System.out.println(departmentRepository.findById(id));
-        return departmentRepository.findById(id).get();
+    public Department getById(Long id) throws DepartmentNotFound {
+        Optional<Department> department = departmentRepository.findById(id);
+        if(!department.isPresent()){
+            throw new DepartmentNotFound("Department not available");
+        }
+        return department.get();
     }
 
     @Override

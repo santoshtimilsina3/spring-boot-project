@@ -1,6 +1,7 @@
 package com.santosh.demo.springboot.demo.controller;
 
 import com.santosh.demo.springboot.demo.entity.Department;
+import com.santosh.demo.springboot.demo.error.DepartmentNotFound;
 import com.santosh.demo.springboot.demo.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/list/{id}")
-    public Department getById(@PathVariable("id") Long departmentId) {
+    public Department getById(@PathVariable("id") Long departmentId) throws DepartmentNotFound {
         Department department = departmentService.getById(departmentId);
         return department;
     }
