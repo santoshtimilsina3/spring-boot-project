@@ -4,6 +4,7 @@ import com.santosh.demo.springboot.demo.entity.Department;
 import com.santosh.demo.springboot.demo.service.DepartmentService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public class DepartmentController {
     }
 
     @PostMapping("/api/v1/create")
-    public Department create(@RequestBody Department department) {
+    public Department create(@Valid @RequestBody Department department) {
         Department department1 = departmentService.save(department);
         return department1;
     }
@@ -41,7 +42,7 @@ public class DepartmentController {
     }
 
     @PutMapping("/update/{id}")
-    public Department update(@PathVariable("id") Long id, @RequestBody Department data){
+    public Department update(@PathVariable("id") Long id,@Valid @RequestBody Department data){
       Department department =  departmentService.update(id,data);
       return department;
     }
