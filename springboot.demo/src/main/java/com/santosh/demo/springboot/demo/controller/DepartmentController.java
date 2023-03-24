@@ -2,6 +2,8 @@ package com.santosh.demo.springboot.demo.controller;
 
 import com.santosh.demo.springboot.demo.entity.Department;
 import com.santosh.demo.springboot.demo.service.DepartmentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,6 +15,9 @@ public class DepartmentController {
 
     private DepartmentService departmentService;
 
+    //can set where to log i.e in file , console,rolling policies ==> configuration can be done in properties files
+    private final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
+
     DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
@@ -20,12 +25,14 @@ public class DepartmentController {
     @PostMapping("/api/v1/create")
     public Department create(@Valid @RequestBody Department department) {
         Department department1 = departmentService.save(department);
+        logger.info("inside save method");
         return department1;
     }
 
     @GetMapping("/list")
     public List<Department> list() {
         List<Department> departmentList = departmentService.findAll();
+        logger.info("inside list");
         return departmentList;
     }
 
