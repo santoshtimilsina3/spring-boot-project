@@ -5,6 +5,8 @@ import com.santosh.demo.springboot.demo.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -27,6 +29,26 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getById(Long id) {
+        System.out.println(departmentRepository.findById(id));
         return departmentRepository.findById(id).get();
     }
+
+    @Override
+    public void deleteDepartmentById(Long departmentId) {
+        departmentRepository.deleteById(departmentId);
+    }
+
+    @Override
+    public Department update(Long id, Department params) {
+        Department department = departmentRepository.findById(id).get();
+        if (Objects.nonNull(params.getName())) {
+            department.setName(params.getName());
+        }
+        if (Objects.nonNull(params.getAddress() != null)) {
+            department.setAddress(params.getAddress());
+        }
+        departmentRepository.save(department);
+        return department;
+    }
+
 }

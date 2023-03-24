@@ -5,6 +5,7 @@ import com.santosh.demo.springboot.demo.service.DepartmentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class DepartmentController {
@@ -31,5 +32,17 @@ public class DepartmentController {
     public Department getById(@PathVariable("id") Long departmentId) {
         Department department = departmentService.getById(departmentId);
         return department;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteDepartment(@PathVariable("id") Long departmentId){
+        departmentService.deleteDepartmentById(departmentId);
+        return  "department delete successfully";
+    }
+
+    @PutMapping("/update/{id}")
+    public Department update(@PathVariable("id") Long id, @RequestBody Department data){
+      Department department =  departmentService.update(id,data);
+      return department;
     }
 }
