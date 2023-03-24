@@ -20,4 +20,6 @@ public interface DepartmentService {
 
 
     Department update(Long id, Department data);
+
+    Department getByName(String name);
 }

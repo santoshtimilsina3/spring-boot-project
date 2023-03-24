@@ -45,4 +45,10 @@ public class DepartmentController {
       Department department =  departmentService.update(id,data);
       return department;
     }
+
+    @GetMapping("/getByName")
+    public Department getByName(@RequestBody Map<String,String> name){
+        Department department = departmentService.getByName(name.get("name"));
+        return department;
+    }
 }
