@@ -13,7 +13,7 @@ public class HelloController {
 
     Logger logger = LoggerFactory.getLogger(HelloController.class);
 
-    @Value("${welcome.message}")
+//    @Value("${welcome.message}")
     private String message;
 
     @GetMapping("/message")

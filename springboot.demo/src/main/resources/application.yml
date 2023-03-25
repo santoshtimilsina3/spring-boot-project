@@ -7,6 +7,20 @@ spring:
 ---
 
 spring:
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: mysql
+    url: jdbc:mysql://localhost:3306/Spring_boot-prod
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+
+
+---
+spring:
   profiles:
     default: dev
   datasource:
@@ -19,16 +33,8 @@ spring:
       ddl-auto: update
     show-sql: 'true'
 
----
-spring:
-  profiles:
-    default: prod
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: mysql
-    url: jdbc:mysql://localhost:3306/Spring_boot-prod
-    password: password
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: 'true'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
