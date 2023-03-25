@@ -24,7 +24,8 @@ public class CourseMaterial {
     private Long courseMaterialId;
     private String url;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,
+    fetch = FetchType.EAGER)
     /* this cascading will save the course in the course table
     then only it will save course material in database*/
     @JoinColumn(
