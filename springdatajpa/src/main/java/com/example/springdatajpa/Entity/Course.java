@@ -27,4 +27,11 @@ public class Course {
     @OneToOne(mappedBy = "course")
     CourseMaterial courseMaterial;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "teacher_id",
+            referencedColumnName = "teacherId"
+    )
+    Teacher teacher;
+
 }
