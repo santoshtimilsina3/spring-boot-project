@@ -15,7 +15,7 @@ import java.lang.reflect.GenericArrayType;
 @Builder
 @Table(name = "tbl_student",
         uniqueConstraints = @UniqueConstraint(
-                name = "emailid_unique",
+                name = "emailId_unique",
                 columnNames = "email_address"
         ))
 public class Student {
@@ -37,9 +37,9 @@ public class Student {
             nullable = false
     )
     private String emailId;
-    private String guardianName;
-    private String getEmail;
-    private String mobile;
+
+    @Embedded
+    Guardian guardian;
 
 
 }
