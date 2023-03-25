@@ -21,5 +21,10 @@ public class Course {
     private Long courseId;
     private String title;
     private Integer credit;
+    /* To make it bidirectional i.e
+    to fetch course material data while fetching course data
+    then we need to make it bidirectional*/
+    @OneToOne(mappedBy = "course")
+    CourseMaterial courseMaterial;
 
 }
