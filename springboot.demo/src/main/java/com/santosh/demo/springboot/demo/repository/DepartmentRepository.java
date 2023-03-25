@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
     public Department findDepartmentByName(String name);
+    public Department findByName(String name);
 
 }

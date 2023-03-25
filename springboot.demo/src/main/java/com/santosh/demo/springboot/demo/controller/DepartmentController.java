@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api/v1/department")
 public class DepartmentController {
 
     private DepartmentService departmentService;
@@ -23,7 +24,7 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @PostMapping("/api/v1/create")
+    @PostMapping("/create")
     public Department create(@Valid @RequestBody Department department) {
         Department department1 = departmentService.save(department);
         logger.info("inside save method");
@@ -37,7 +38,7 @@ public class DepartmentController {
         return departmentList;
     }
 
-    @GetMapping("/list/{id}")
+    @GetMapping("/get/{id}")
     public Department getById(@PathVariable("id") Long departmentId) throws DepartmentNotFound {
         Department department = departmentService.getById(departmentId);
         return department;

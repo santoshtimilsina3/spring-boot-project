@@ -3,14 +3,15 @@ package com.santosh.demo.springboot.demo.service;
 import com.santosh.demo.springboot.demo.entity.Department;
 import com.santosh.demo.springboot.demo.error.DepartmentNotFound;
 import com.santosh.demo.springboot.demo.repository.DepartmentRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Primary
 public class DepartmentServiceImpl implements DepartmentService {
 
     private DepartmentRepository departmentRepository;
