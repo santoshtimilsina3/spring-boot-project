@@ -2,6 +2,13 @@ server:
   port:8080
 
 spring:
+  profiles:
+    active: dev
+---
+
+spring:
+  profiles:
+    default: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: mysql
@@ -11,5 +18,17 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: 'true'
-welcome:
-  message: Hello welcome to spring boot
+
+---
+spring:
+  profiles:
+    default: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: mysql
+    url: jdbc:mysql://localhost:3306/Spring_boot-prod
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
