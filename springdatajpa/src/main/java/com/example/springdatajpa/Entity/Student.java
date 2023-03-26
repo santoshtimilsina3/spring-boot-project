@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.lang.reflect.GenericArrayType;
+import java.util.List;
 
 @Entity
 @Data
@@ -40,6 +41,16 @@ public class Student {
 
     @Embedded
     Guardian guardian;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "student_course_map",
+            joinColumns = @JoinColumn(
+                    name = "student_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(name = "course_id",
+                    referencedColumnName = "courseId")
+    )
+    List<Course> courses;
 
 
 }
