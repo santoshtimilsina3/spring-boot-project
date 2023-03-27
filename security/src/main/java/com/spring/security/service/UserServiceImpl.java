@@ -1,8 +1,8 @@
-package com.santosh.springsecurity.service;
+package com.spring.security.service;
 
-import com.santosh.springsecurity.entity.User;
-import com.santosh.springsecurity.model.UserModel;
-import com.santosh.springsecurity.repository.UserRepository;
+import com.spring.security.entity.User;
+import com.spring.security.model.UserModel;
+import com.spring.security.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService {
     UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
 
     @Override
     public User registerUser(UserModel userModel) {

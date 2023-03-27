@@ -1,8 +1,9 @@
-package com.santosh.springsecurity.controller;
+package com.spring.security.controller;
 
-import com.santosh.springsecurity.entity.User;
-import com.santosh.springsecurity.model.UserModel;
-import com.santosh.springsecurity.service.UserService;
+
+import com.spring.security.entity.User;
+import com.spring.security.model.UserModel;
+import com.spring.security.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ public class RegistrationController {
     @PostMapping("/register")
     public String registerUser(@RequestBody UserModel userModel){
     User user = userService.registerUser(userModel);
+    return null;
     }
 
 }

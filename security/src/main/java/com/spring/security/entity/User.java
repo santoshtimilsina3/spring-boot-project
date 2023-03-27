@@ -1,10 +1,11 @@
-package com.santosh.springsecurity.entity;
+package com.spring.security.entity;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
+import javax.persistence.*;
+
 @Entity
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,5 +17,4 @@ public class User {
     private String password;
     private String role;
     private boolean enabled = false;
-
 }
